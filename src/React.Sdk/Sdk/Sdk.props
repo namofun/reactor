@@ -1,0 +1,49 @@
+<!--
+***********************************************************************************************
+Sdk.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+***********************************************************************************************
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+
+  <PropertyGroup Condition="'$(MSBuildProjectFullPath)' == '$(ProjectToOverrideProjectExtensionsPath)'">
+    <MSBuildProjectExtensionsPath>$(ProjectExtensionsPathForSpecifiedProject)</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+
+  <Import Project="$(AlternateCommonProps)" Condition="'$(AlternateCommonProps)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="'$(AlternateCommonProps)' == ''"/>
+
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**\*</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultReactFileIncludePattern>**\*.css;**\*.scss;**\*.js</DefaultReactFileIncludePattern>
+    <EnableDefaultReactFileItems Condition=" '$(EnableDefaultReactFileItems)' == '' ">true</EnableDefaultReactFileItems>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(DefaultReactFileIncludePattern)</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(EnableDefaultItems)' == 'true' AND '$(EnableDefaultReactFileItems)' == 'true'">
+    <ReactFileCompile Include="$(DefaultReactFileIncludePattern)" Exclude="$(DefaultItemExcludes.Replace('$(DefaultReactFileIncludePattern)', ''));$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DefaultReactMetadataPattern>package-lock.json;package.json;tsconfig.json;tslint.json</DefaultReactMetadataPattern>
+    <EnableDefaultReactMetadata Condition=" '$(EnableDefaultReactMetadata)' == '' ">true</EnableDefaultReactMetadata>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(DefaultReactMetadataPattern)</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(EnableDefaultItems)' == 'true' AND '$(EnableDefaultReactMetadata)' == 'true'">
+    <ReactMetadata Include="$(DefaultReactMetadataPattern)" Exclude="$(DefaultItemExcludes.Replace('$(DefaultReactMetadataPattern)', ''));$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <StartupFile Condition=" '$(StartupFile)' == '' ">node_modules\react-scripts\scripts\start.js</StartupFile>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+</Project>

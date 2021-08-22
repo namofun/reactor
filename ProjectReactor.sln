@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Namofun.Sdk.React", "src\React.Sdk\Namofun.Sdk.React.csproj", "{03071FA5-CF4E-4487-A0F8-4D3E1BF6CF5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1F61A68-1BA0-40C8-983C-1EEE3A43CEFB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03071FA5-CF4E-4487-A0F8-4D3E1BF6CF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03071FA5-CF4E-4487-A0F8-4D3E1BF6CF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03071FA5-CF4E-4487-A0F8-4D3E1BF6CF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03071FA5-CF4E-4487-A0F8-4D3E1BF6CF5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C659DA3-2FBD-471C-9D45-103AD1802D8B}
+	EndGlobalSection
+EndGlobal

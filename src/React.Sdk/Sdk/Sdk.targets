@@ -1,0 +1,96 @@
+<!--
+***********************************************************************************************
+Sdk.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+***********************************************************************************************
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+
+  <PropertyGroup>
+    <AnalysisIgnoredDirectories Condition="'$(AnalysisIgnoredDirectories)' == ''">bower_components;node_modules\core-js</AnalysisIgnoredDirectories>
+    <DockerExtraPublishProfileProperties>ExcludeFoldersFromDeployment=node_modules</DockerExtraPublishProfileProperties>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectHome Condition="'$(ProjectHome)' == ''">.</ProjectHome>
+    <DebugSymbols>false</DebugSymbols>
+    <FakesImported>true</FakesImported>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <QualifiedProjectHome>$(MSBuildProjectDirectory)</QualifiedProjectHome>
+    <QualifiedProjectHome Condition="'$(ProjectHome)' != '' and '$(ProjectHome)' != '.'">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(ProjectHome)))))</QualifiedProjectHome>
+    <QualifiedProjectHome Condition="!HasTrailingSlash('$(QualifiedProjectHome)')">$(QualifiedProjectHome)\</QualifiedProjectHome>
+  </PropertyGroup>
+
+  <Target Name="GetTargetFrameworkVersion" Returns="$(TargetFrameworkVersion)" />
+  <Target Name="GetTargetFrameworkDirectories" Returns="" />
+  <Target Name="GetTargetFrameworkMoniker" Returns="" />
+  <Target Name="GetTargetFrameworkMonikerDisplayName" Returns="" />
+  <Target Name="CreateManifestResourceNames" Returns=""/>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets"/>
+
+  <Target
+    Name="GetReferenceAssemblyPaths"
+    DependsOnTargets="$(GetReferenceAssemblyPathsDependsOn)">
+    <!-- We have no reference assembly paths -->
+  </Target>
+
+  <ItemGroup>
+    <NodeModulesContent Include="$(ProjectHome)\node_modules\**\*.*" />
+    <TypeScriptSource Exclude="$(ProjectHome)\node_modules\**\*.*;$(ProjectHome)\obj\**\*.*;$(ProjectHome)\bin\**\*.*;$(ProjectHome)\**\*.d.ts" Include="$(ProjectHome)\**\*.ts;$(ProjectHome)\**\*.tsx;$(ProjectHome)\**\*.jsx;" />
+  </ItemGroup>
+
+  <Target Name="CopyFilesToOutputDirectory" />
+
+  <Target Name="AfterClean">
+    <Exec Command="npm run clean" />
+  </Target>
+
+  <Target Name="AfterCompile">
+    <Exec Command="npm install" />
+  </Target>
+
+  <Target Name="CoreCompile" />
+
+  <Target Name="BuiltProjectOutputGroup"
+          Returns="@(BuiltProjectOutputGroupOutput)"
+          DependsOnTargets="$(BuiltProjectOutputGroupDependsOn)" />
+
+  <Target
+      Name="SourceFilesProjectOutputGroup"
+      Returns="@(SourceFilesProjectOutputGroupOutput)"
+      DependsOnTargets="$(SourceFilesProjectOutputGroupDependsOn)" />
+
+  <Target Name="DebugSymbolsProjectOutputGroup" />
+
+  <Target
+    Name="GetTargetPath"
+    DependsOnTargets="CoreCompile"
+    Returns="@(ScriptAndWebDeployFilesWithoutMetadata)" />
+
+  <Target Name="WatGetTargetFrameworkDirectories" Returns="" />
+  <Target Name="BuiltProjectOutputGroupDependencies" Returns="" />
+  <Target Name="WatGetTargetFrameworkMoniker" Returns="" />
+  <Target Name="WatGetTargetFrameworkMonikerDisplayName" Returns="" />
+  <Target Name="GenerateManifests" Returns="" />
+  <Target Name="PrepareForBuild" DependsOnTargets="$(PrepareForBuildDependsOn)" />
+
+  <Target
+      Name="ResolveAssemblyReferences"
+      Returns="@(ReferencePath)"
+      DependsOnTargets="$(ResolveAssemblyReferencesDependsOn)">
+  </Target>
+
+  <Target Name="Restore" />
+
+  <Target Name="Pack">
+    <Exec Command="npm run build" />
+  </Target>
+
+</Project>

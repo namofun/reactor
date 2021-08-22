@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.0</Version>
+    <Authors>yang-er</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/namofun/reactor</PackageProjectUrl>
+    <Description>React is a front-end programming framework. This package contains MSBuild support for React.</Description>
+    <PackageTags>react</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Sdk\*" Pack="true" PackagePath="Sdk\" />
+    <None Include="lib\netstandard2.0\_._" Pack="true" PackagePath="lib\netstandard2.0\_._" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.3.5" />
+  </ItemGroup>
+
+</Project>

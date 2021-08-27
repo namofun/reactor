@@ -10,22 +10,17 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
 
   <PropertyGroup>
+    <ManagedDesignTimeTargetsPath Condition="'$(ManagedDesignTimeTargetsPath)'==''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\Managed\Microsoft.Managed.DesignTime.targets</ManagedDesignTimeTargetsPath>
+  </PropertyGroup>
+
+  <Import Project="$(ManagedDesignTimeTargetsPath)" Condition="'$(ManagedDesignTimeTargetsPath)' != '' and Exists('$(ManagedDesignTimeTargetsPath)')" />
+
+  <PropertyGroup>
     <AnalysisIgnoredDirectories Condition="'$(AnalysisIgnoredDirectories)' == ''">bower_components;node_modules\core-js</AnalysisIgnoredDirectories>
     <DockerExtraPublishProfileProperties>ExcludeFoldersFromDeployment=node_modules</DockerExtraPublishProfileProperties>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <ProjectHome Condition="'$(ProjectHome)' == ''">.</ProjectHome>
-    <DebugSymbols>false</DebugSymbols>
-    <FakesImported>true</FakesImported>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <QualifiedProjectHome>$(MSBuildProjectDirectory)</QualifiedProjectHome>
-    <QualifiedProjectHome Condition="'$(ProjectHome)' != '' and '$(ProjectHome)' != '.'">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(ProjectHome)))))</QualifiedProjectHome>
-    <QualifiedProjectHome Condition="!HasTrailingSlash('$(QualifiedProjectHome)')">$(QualifiedProjectHome)\</QualifiedProjectHome>
-  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets"/>
 
   <Target Name="GetTargetFrameworkVersion" Returns="$(TargetFrameworkVersion)" />
   <Target Name="GetTargetFrameworkDirectories" Returns="" />
@@ -33,18 +28,11 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
   <Target Name="GetTargetFrameworkMonikerDisplayName" Returns="" />
   <Target Name="CreateManifestResourceNames" Returns=""/>
 
-  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets"/>
-
   <Target
     Name="GetReferenceAssemblyPaths"
     DependsOnTargets="$(GetReferenceAssemblyPathsDependsOn)">
     <!-- We have no reference assembly paths -->
   </Target>
-
-  <ItemGroup>
-    <NodeModulesContent Include="$(ProjectHome)\node_modules\**\*.*" />
-    <TypeScriptSource Exclude="$(ProjectHome)\node_modules\**\*.*;$(ProjectHome)\obj\**\*.*;$(ProjectHome)\bin\**\*.*;$(ProjectHome)\**\*.d.ts" Include="$(ProjectHome)\**\*.ts;$(ProjectHome)\**\*.tsx;$(ProjectHome)\**\*.jsx;" />
-  </ItemGroup>
 
   <Target Name="CopyFilesToOutputDirectory" />
 

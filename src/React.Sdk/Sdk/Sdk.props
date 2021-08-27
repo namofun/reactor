@@ -9,6 +9,15 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
 
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <UsingMicrosoftNETSdk>true</UsingMicrosoftNETSdk>
+    <UsingNETSdkDefaults>true</UsingNETSdkDefaults>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(MSBuildProjectFullPath)' == '$(ProjectToOverrideProjectExtensionsPath)'">
     <MSBuildProjectExtensionsPath>$(ProjectExtensionsPathForSpecifiedProject)</MSBuildProjectExtensionsPath>
   </PropertyGroup>
@@ -17,35 +26,46 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="'$(AlternateCommonProps)' == ''"/>
 
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**\*</DefaultItemExcludes>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <DefaultReactFileIncludePattern>**\*.css;**\*.scss;**\*.js</DefaultReactFileIncludePattern>
-    <EnableDefaultReactFileItems Condition=" '$(EnableDefaultReactFileItems)' == '' ">true</EnableDefaultReactFileItems>
-    <DefaultItemExcludes>$(DefaultItemExcludes);$(DefaultReactFileIncludePattern)</DefaultItemExcludes>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(EnableDefaultItems)' == 'true' AND '$(EnableDefaultReactFileItems)' == 'true'">
-    <ReactFileCompile Include="$(DefaultReactFileIncludePattern)" Exclude="$(DefaultItemExcludes.Replace('$(DefaultReactFileIncludePattern)', ''));$(DefaultExcludesInProjectFolder)" />
-  </ItemGroup>
-
-  <PropertyGroup>
-    <DefaultReactMetadataPattern>package-lock.json;package.json;tsconfig.json;tslint.json</DefaultReactMetadataPattern>
-    <EnableDefaultReactMetadata Condition=" '$(EnableDefaultReactMetadata)' == '' ">true</EnableDefaultReactMetadata>
-    <DefaultItemExcludes>$(DefaultItemExcludes);$(DefaultReactMetadataPattern)</DefaultItemExcludes>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(EnableDefaultItems)' == 'true' AND '$(EnableDefaultReactMetadata)' == 'true'">
-    <ReactMetadata Include="$(DefaultReactMetadataPattern)" Exclude="$(DefaultItemExcludes.Replace('$(DefaultReactMetadataPattern)', ''));$(DefaultExcludesInProjectFolder)" />
-  </ItemGroup>
-
-  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <StartupFile Condition=" '$(StartupFile)' == '' ">node_modules\react-scripts\scripts\start.js</StartupFile>
     <DebugSymbols>false</DebugSymbols>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <ProjectHome Condition="'$(ProjectHome)' == ''">.</ProjectHome>
+    <DebugSymbols>false</DebugSymbols>
+    <FakesImported>true</FakesImported>
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <EnableDefaultNoneItems>true</EnableDefaultNoneItems>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <QualifiedProjectHome>$(MSBuildProjectDirectory)</QualifiedProjectHome>
+    <QualifiedProjectHome Condition="'$(ProjectHome)' != '' and '$(ProjectHome)' != '.'">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(ProjectHome)))))</QualifiedProjectHome>
+    <QualifiedProjectHome Condition="!HasTrailingSlash('$(QualifiedProjectHome)')">$(QualifiedProjectHome)\</QualifiedProjectHome>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultItemExcludes>**/*.user;**/*.*proj;**/*.sln;**/*.vssscc</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**/*;obj/**/*</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules/**/*</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);build/**/*</DefaultItemExcludes>
+    <DefaultTypeScriptCompileItems>**/*.ts;**/*.tsx</DefaultTypeScriptCompileItems>
+    <DefaultCompileItems>**/*.js;**/*.jsx;**/*.css;**/*.scss;**/*.html;**/*.htm</DefaultCompileItems>
+    <DefaultContentNoneItems>**/*.json</DefaultContentNoneItems>
+    <DefaultContentIncludes>$(DefaultTypeScriptCompileItems);$(DefaultCompileItems);$(DefaultContentNoneItems)</DefaultContentIncludes>
+    <DefaultNoneExcludes>$(DefaultContentIncludes);$(DefaultItemExcludes)</DefaultNoneExcludes>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(EnableDefaultItems)' == 'true' ">
+    <Content Include="$(DefaultContentIncludes)" Exclude="$(DefaultItemExcludes)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(EnableDefaultItems)' == 'true' And '$(EnableDefaultNoneItems)' == 'true' ">
+    <None Include="**/*" Exclude="$(DefaultNoneExcludes)" />
+  </ItemGroup>
 
 </Project>

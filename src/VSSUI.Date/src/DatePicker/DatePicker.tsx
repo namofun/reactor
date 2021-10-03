@@ -8,7 +8,7 @@ import { Observer } from "azure-devops-ui/Observer";
 import { FormItem } from "azure-devops-ui/FormItem";
 import { TextField } from "azure-devops-ui/TextField";
 import { Callout, ContentLocation } from "azure-devops-ui/Callout";
-import { Calendar } from "office-ui-fabric-react";
+import { Calendar } from "../Calendar";
 
 import "./DatePicker.css";
 import { datePickerStrings, Resources } from "./DataStringHelpers";

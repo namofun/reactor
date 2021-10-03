@@ -8,6 +8,10 @@
     width: 450px;
 }
 
+.bolt-date-picker .ms-DatePicker-wrap {
+    height: 252px;
+}
+
 .bolt-date-picker-input {
     padding-right: 0;
 }

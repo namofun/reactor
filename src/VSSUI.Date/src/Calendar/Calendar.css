@@ -1,0 +1,918 @@
+.ms-DatePicker {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ms-DatePicker *::-moz-focus-inner {
+    border: 0;
+}
+
+.ms-DatePicker * {
+    outline: transparent;
+}
+
+.ms-DatePicker * {
+    position: relative;
+}
+
+.ms-Fabric--isFocusVisible .ms-DatePicker *:focus:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    border: 1px solid rgba(102, 102, 102, 1);
+    border: 1px solid rgba(var(--palette-neutral-60, 102, 102, 102), 1);
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .ms-DatePicker *::-moz-focus-inner {
+        border: 0;
+    }
+
+    .ms-DatePicker * {
+        outline: transparent;
+    }
+
+    .ms-DatePicker * {
+        position: relative;
+    }
+
+    .ms-DatePicker *:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        border: 2px solid WindowText;
+    }
+}
+
+.ms-DatePicker-picker {
+    color: rgba(0, 0, 0, .9);
+    color: var(--text-primary-color,rgba(0, 0, 0, .9));
+    font-size: 14px;
+    position: relative;
+}
+
+.ms-DatePicker-picker {
+    text-align: left;
+}
+
+.ms-DatePicker-holder {
+    -webkit-overflow-scrolling: touch;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+}
+
+.ms-DatePicker-picker.ms-DatePicker-picker--opened .ms-DatePicker-holder {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.ms-DatePicker-picker--opened {
+    position: relative;
+}
+
+.ms-DatePicker-frame {
+    position: relative;
+}
+
+.ms-DatePicker-wrap {
+    min-height: 212px;
+    padding: 12px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.ms-DatePicker-wrap.ms-DatePicker-goTodaySpacing {
+    min-height: 228px;
+}
+
+.ms-DatePicker-dayPicker {
+    display: block;
+}
+
+.ms-DatePicker-header {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    height: 28px;
+    line-height: 44px;
+    width: 100%;
+}
+
+.ms-DatePicker-divider {
+    top: 0;
+    margin-top: -12px;
+    margin-bottom: -12px;
+}
+
+.ms-DatePicker-divider {
+    border-right: 1px solid rgba(234, 234, 234, 1);
+    border-right: 1px solid rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+}
+
+.ms-DatePicker-monthAndYear,
+.ms-DatePicker-year {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.ms-DatePicker-monthAndYear:hover,
+.ms-DatePicker-currentYear:hover {
+    color: rgba(0, 0, 0, .9);
+    color: var(--text-primary-color,rgba(0, 0, 0, .9));
+}
+
+.ms-DatePicker-table {
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: inherit;
+    margin-top: 4px;
+    width: 197px;
+}
+
+.ms-DatePicker-table td {
+    margin: 0;
+    padding: 0;
+}
+
+.ms-DatePicker-table td:hover {
+    outline: 1px solid transparent;
+}
+
+.ms-DatePicker-dayWrapper,
+.ms-DatePicker-weekday {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    line-height: 28px;
+    font-size: 12px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.ms-DatePicker-dayWrapper *::-moz-focus-inner,
+.ms-DatePicker-weekday *::-moz-focus-inner {
+    border: 0
+}
+
+.ms-DatePicker-dayWrapper *,
+.ms-DatePicker-weekday * {
+    outline: transparent;
+}
+
+.ms-DatePicker-dayWrapper *,
+.ms-DatePicker-weekday * {
+    position: relative;
+}
+
+.ms-Fabric--isFocusVisible .ms-DatePicker-dayWrapper *:focus:after,
+.ms-Fabric--isFocusVisible .ms-DatePicker-weekday *:focus:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    pointer-events: none;
+    border: 1px solid rgba(102, 102, 102, 1);
+    border: 1px solid rgba(var(--palette-neutral-60, 102, 102, 102), 1);
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .ms-DatePicker-dayWrapper *::-moz-focus-inner,
+    .ms-DatePicker-weekday *::-moz-focus-inner {
+        border: 0;
+    }
+
+    .ms-DatePicker-dayWrapper *,
+    .ms-DatePicker-weekday * {
+        outline: transparent;
+    }
+
+    .ms-DatePicker-dayWrapper *,
+    .ms-DatePicker-weekday * {
+        position: relative;
+    }
+
+    .ms-DatePicker-dayWrapper *:after,
+    .ms-DatePicker-weekday *:after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        bottom: -2px;
+        left: -2px;
+        pointer-events: none;
+        border: 2px solid WindowText;
+    }
+}
+
+.ms-DatePicker-day {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.ms-DatePicker-day--today,
+.ms-DatePicker-day--today:hover {
+    position: relative;
+    background-color: rgba(199, 224, 244, 1);
+    background-color: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .ms-DatePicker-day--today,
+    .ms-DatePicker-day--today:hover {
+        border: 1px solid WindowText;
+    }
+}
+
+.ms-DatePicker-day--disabled:before {
+    border-top-color: rgba(166, 166, 166, 1);
+    border-top-color: rgba(var(--palette-neutral-30, 166, 166, 166), 1);
+}
+
+.ms-DatePicker-day--outfocus,
+.ms-DatePicker-day--disabled {
+    color: rgba(102, 102, 102, 1);
+    color: rgba(var(--palette-neutral-60, 102, 102, 102), 1);
+    font-weight: 400;
+}
+
+.ms-DatePicker-day--infocus:hover,
+.ms-DatePicker-day--outfocus:hover {
+    cursor: pointer;
+    background: rgba(234, 234, 234, 1);
+    background: rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80,rgba(0, 0, 0, 0.87));
+}
+
+.ms-DatePicker-day--highlighted:hover,
+.ms-DatePicker-picker--focused .ms-DatePicker-day--highlighted {
+    cursor: pointer;
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .ms-DatePicker-day--highlighted:hover,
+    .ms-DatePicker-picker--focused .ms-DatePicker-day--highlighted {
+        border: 2px solid Highlight;
+    }
+}
+
+.ms-DatePicker-day--infocus:active,
+.ms-DatePicker-day--highlighted {
+    background: rgba(199, 224, 244, 1);
+    background: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+}
+
+.ms-DatePicker-day--infocus:active.ms-DatePicker-day,
+.ms-DatePicker-day--highlighted.ms-DatePicker-day {
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    font-weight: 600
+}
+
+.ms-DatePicker-day--highlighted.ms-DatePicker-dayDisabled,
+.ms-DatePicker-day--highlighted.ms-DatePicker-dayDisabled:hover {
+    background: rgba(166, 166, 166, 1);
+    background: rgba(var(--palette-neutral-30, 166, 166, 166), 1);
+}
+
+.ms-DatePicker-dayBackground,
+.ms-DatePicker-dayBackground:hover,
+.ms-DatePicker-dayBackground:active {
+    border-radius: 2px;
+}
+
+.ms-DatePicker-dayHover,
+.ms-DatePicker-dayHover:hover {
+    cursor: pointer;
+    background: rgba(234, 234, 234, 1);
+    background: rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80,rgba(0, 0, 0, 0.87));
+}
+
+.ms-DatePicker-dayPress,
+.ms-DatePicker-dayPress:hover {
+    cursor: pointer;
+    font-weight: 600;
+    background: rgba(199, 224, 244, 1);
+    background: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+}
+
+.ms-DatePicker-dayPress .ms-DatePicker-day--today,
+.ms-DatePicker-dayPress:hover .ms-DatePicker-day--today {
+    background: rgba(0, 120, 212, 1);
+    background: var(--status-info-background, rgba(0, 120, 212, 1));
+}
+
+.ms-DatePicker-day--outfocus:active,
+.ms-DatePicker-day--infocus:active,
+.ms-DatePicker-day--highlighted,
+.ms-DatePicker-day--highlighted:hover,
+.ms-DatePicker-day--highlighted:active,
+.ms-DatePicker-weekBackground,
+.ms-DatePicker-weekBackground:hover,
+.ms-DatePicker-weekBackground:active {
+    background: rgba(199, 224, 244, 1);
+    background: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    font-weight: 600;
+}
+
+.ms-DatePicker-day--today,
+.ms-DatePicker-day--today,
+.ms-DatePicker-picker--focused .ms-DatePicker-day--today,
+.ms-DatePicker-day--today.ms-DatePicker-day:active {
+    position: relative;
+    color: rgba(255, 255, 255);
+    color: rgba(var(--palette-neutral-0), 1);
+    font-weight: 600;
+    background: rgba(0, 120, 212, 1);
+    background: var(--status-info-background, rgba(0, 120, 212, 1));
+}
+
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-weekNumbers {
+    border-right: 1px solid rgba(234, 234, 234, 1);
+    border-right: 1px solid rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 28x;
+    padding: 0;
+}
+
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-weekNumbers .ms-DatePicker-dayWrapper {
+    color: rgba(102, 102, 102, 1);
+    color: rgba(var(--palette-neutral-60, 102, 102, 102), 1);
+}
+
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-weekNumbers .ms-DatePicker-dayWrapper.ms-DatePicker-week--highlighted {
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+}
+
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-table {
+    width: 225px;
+}
+
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-table .ms-DatePicker-dayWrapper,
+.ms-DatePicker-showWeekNumbers .ms-DatePicker-table .ms-DatePicker-weekday {
+    width: 30px;
+}
+
+.ms-DatePicker-monthComponents,
+.ms-DatePicker-yearComponents,
+.ms-DatePicker-decadeComponents {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+}
+
+.ms-DatePicker-prevMonth,
+.ms-DatePicker-nextMonth,
+.ms-DatePicker-prevYear,
+.ms-DatePicker-nextYear,
+.ms-DatePicker-prevDecade,
+.ms-DatePicker-nextDecade {
+    width: 28px;
+    height: 28px;
+    display: block;
+    text-align: center;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    border-radius: 2px;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.ms-DatePicker-prevMonth:hover,
+.ms-DatePicker-nextMonth:hover,
+.ms-DatePicker-prevYear:hover,
+.ms-DatePicker-nextYear:hover,
+.ms-DatePicker-prevDecade:hover,
+.ms-DatePicker-nextDecade:hover {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80,rgba(0, 0, 0, 0.87));
+    cursor: pointer;
+    outline: 1px solid transparent;
+}
+
+.ms-DatePicker-prevMonth--disabled,
+.ms-DatePicker-nextMonth--disabled,
+.ms-DatePicker-prevYear--disabled,
+.ms-DatePicker-nextYear--disabled,
+.ms-DatePicker-prevDecade--disabled,
+.ms-DatePicker-nextDecade--disabled {
+    color: rgba(200, 200, 200, 1);
+    color: rgba(var(--palette-neutral-20, 200, 200, 200), 1);
+    pointer-events: none;
+}
+
+.ms-DatePicker-headerToggleView {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.ms-DatePicker-headerToggleView:hover {
+    color:rgba(0, 0, 0);
+    color: rgba(var(--palette-neutral-100), 1);
+    cursor: pointer;
+}
+
+.ms-DatePicker-currentYear,
+.ms-DatePicker-currentDecade {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding: 0 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    height: 28px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+html .ms-DatePicker-header .ms-DatePicker-currentYear,
+html .ms-DatePicker-header .ms-DatePicker-currentDecade {
+    margin-left: 5px;
+}
+
+.ms-DatePicker-optionGrid {
+    position: relative;
+    height: 210px;
+    width: 196px;
+    margin: 4px 0 0 0;
+}
+
+.ms-DatePicker-monthOption,
+.ms-DatePicker-yearOption {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
+    margin: 0 10px 10px 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    text-align: center;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+.ms-DatePicker-monthOption,
+.ms-DatePicker-yearOption {
+    float: left;
+}
+
+.ms-DatePicker-monthOption:hover,
+.ms-DatePicker-yearOption:hover {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80, rgba(0, 0, 0, 0.87));
+    background-color: rgba(234, 234, 234, 1);
+    background-color: rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+    outline: 1px solid transparent;
+}
+
+.ms-DatePicker-monthOption.ms-DatePicker-isHighlighted,
+.ms-DatePicker-yearOption.ms-DatePicker-isHighlighted {
+    background-color: rgba(51, 51, 51, 1);
+    background-color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    color: rgba(255, 255, 255);
+    color: rgba(var(--palette-neutral-0), 1);
+}
+
+.ms-DatePicker-day--disabled,
+.ms-DatePicker-monthOption--disabled,
+.ms-DatePicker-yearOption--disabled {
+    background-color: rgba(200, 200, 200, 1);
+    background-color: rgba(var(--palette-neutral-20, 200, 200, 200), 1);
+    pointer-events: none;
+}
+
+.ms-DatePicker-goToday {
+    bottom: 0;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background-color: transparent;
+    border: none;
+    position: absolute !important;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.ms-DatePicker-goToday {
+    right: 13px;
+}
+
+.ms-DatePicker-goToday:hover {
+    color: rgba(0, 120, 212, 1);
+    color: var(--status-info-foreground, rgba(0, 120, 212, 1));
+    outline: 1px solid transparent;
+}
+
+.ms-DatePicker-goToday:active {
+    color: rgba(0, 90, 158, 1);
+    color: rgba(var(--palette-primary-shade-20, 0, 90, 158), 1);
+}
+
+.ms-DatePicker-goTodayInlineMonth {
+    top: 212px;
+}
+
+.ms-DatePicker-wrap.ms-DatePicker-goTodaySpacing {
+    padding-bottom: 28px;
+}
+
+.ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-dayPicker,
+.ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-monthComponents {
+    display: none;
+}
+
+.ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-monthPicker {
+    display: none;
+}
+
+.ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-yearPicker {
+    display: block;
+}
+
+@media (min-device-width: 460px) {
+    .ms-DatePicker-wrap {
+        padding: 12px;
+    }
+
+    .ms-DatePicker-dayPicker,
+    .ms-DatePicker-monthPicker {
+        min-height: 200px;
+    }
+
+    .ms-DatePicker-header {
+        height: 28px;
+        line-height: 28px;
+        width: 100%;
+    }
+
+    .ms-DatePicker-dayWrapper,
+    .ms-DatePicker-weekday {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+    }
+
+    .ms-DatePicker-prevMonth,
+    .ms-DatePicker-nextMonth,
+    .ms-DatePicker-prevYear,
+    .ms-DatePicker-nextYear,
+    .ms-DatePicker-prevDecade,
+    .ms-DatePicker-nextDecade {
+        font-size: 12px;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+    }
+
+    .ms-DatePicker-holder {
+        display: inline-block;
+        height: auto;
+    }
+
+    .ms-DatePicker-monthAndYear,
+    .ms-DatePicker-year {
+        font-size: 14px;
+        color: rgba(51, 51, 51, 1);
+        color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+    }
+
+    .ms-DatePicker-yearComponents {
+        margin-left: 1px;
+    }
+
+    .ms-DatePicker-goToday {
+        padding: 0 3px;
+    }
+
+    .ms-DatePicker-goToday {
+        right: 20px;
+    }
+
+    .ms-DatePicker-showWeekNumbers .ms-DatePicker-table .ms-DatePicker-dayWrapper,
+    .ms-DatePicker-showWeekNumbers .ms-DatePicker-table .ms-DatePicker-weekday {
+        width: 28px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-wrap {
+        padding: 12px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-dayPicker {
+        margin: -10px 0;
+        padding: 10px 0;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-dayPicker {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 212px;
+        min-height: 200px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-monthPicker {
+        display: block;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-optionGrid {
+        height: 150px;
+        width: 196px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-toggleMonthView {
+        display: none;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-currentYear,
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-currentDecade {
+        font-size: 14px;
+        margin: 0;
+        height: 28px;
+        line-height: 28px;
+        display: inline-block;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-monthOption,
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-yearOption {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+        margin: 0 12px 16px 0;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-monthOption:hover,
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-yearOption:hover {
+        outline: 1px solid transparent;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-monthOption:nth-child(4n+4),
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-yearOption:nth-child(4n+4) {
+        margin: 0 0px 16px 0;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-goToday {
+        font-size: 12px;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 10px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-goToday {
+        right: 8px;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker-goToday {
+        text-align: right;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-dayPicker,
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-monthComponents {
+        display: block;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-monthPicker {
+        display: none;
+    }
+
+    .ms-DatePicker-monthPickerVisible .ms-DatePicker.ms-DatePicker-isPickingYears .ms-DatePicker-yearPicker {
+        display: block;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-wrap {
+        padding: 12px;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-holder {
+        height: auto;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-table {
+        margin-right: 12px;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-dayPicker {
+        width: auto;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-monthPicker {
+        margin-left: 12px;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-goToday {
+        padding: 0 10px;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-goToday {
+        right: 14px;
+    }
+
+    .ms-DatePicker-calendarsInline .ms-DatePicker-monthComponents {
+        margin-right: 12px;
+    }
+
+    .ms-DatePicker-monthPickerOnly .ms-DatePicker-wrap {
+        padding: 12px;
+    }
+
+    .ms-DatePicker-monthPickerAsOverlay .ms-DatePicker-wrap {
+        padding-bottom: 28px;
+        margin-bottom: 6px;
+    }
+
+    .ms-DatePicker-monthPickerAsOverlay .ms-DatePicker-holder {
+        height: 240px;
+        min-height: 240px;
+    }
+
+    .ms-DatePicker-monthPickerAsOverlay .ms-DatePicker-holderWithButton {
+        padding-top: 6px;
+        height: auto;
+    }
+}
+
+@media (max-device-width: 459px) {
+    .ms-DatePicker-calendarsInline .ms-DatePicker-monthPicker,
+    .ms-DatePicker-calendarsInline .ms-DatePicker-yearPicker {
+        display: none;
+    }
+
+    .ms-DatePicker-yearComponents {
+        margin-top: 2px;
+    }
+}
+
+.ms-DatePicker-goToday {
+    width: auto;
+}
+
+.ms-DatePicker-nextMonth,
+.ms-DatePicker-prevMonth,
+.ms-DatePicker-nextYear,
+.ms-DatePicker-prevYear {
+    display: inline-block;
+}
+
+.ms-DatePicker-nextMonth:hover,
+.ms-DatePicker-prevMonth:hover,
+.ms-DatePicker-nextYear:hover,
+.ms-DatePicker-prevYear:hover {
+    background-color: rgba(234, 234, 234, 1);
+    background-color: rgba(var(--palette-neutral-8, 234, 234, 234), 1);
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80,rgba(0, 0, 0, 0.87));
+}
+
+.ms-DatePicker-nextMonth:active,
+.ms-DatePicker-prevMonth:active,
+.ms-DatePicker-nextYear:active,
+.ms-DatePicker-prevYear:active {
+    background-color: rgba(199, 224, 244, 1);
+    background-color: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+}
+
+.ms-DatePicker-month--highlighted {
+    font-weight: 600;
+    background-color: rgba(199, 224, 244, 1);
+    background-color: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+    color: rgba(51, 51, 51, 1);
+    color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
+}
+
+.ms-DatePicker-month--highlighted.ms-DatePicker-monthOption:hover {
+    background-color: rgba(199, 224, 244, 1);
+    background-color: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+}
+
+.ms-DatePicker-month--currentMonth {
+    font-weight: 600;
+    color: rgba(255, 255, 255);
+    color: rgba(var(--palette-neutral-0), 1);
+    background-color: rgba(0, 120, 212, 1);
+    background-color: var(--status-info-background, rgba(0, 120, 212, 1));
+}
+
+.ms-DatePicker-month--currentMonth.ms-DatePicker-monthOption:hover {
+    font-weight: 600;
+    color: rgba(255, 255, 255);
+    color: rgba(var(--palette-neutral-0), 1);
+    background-color: rgba(0, 120, 212, 1);
+    background-color: var(--status-info-background, rgba(0, 120, 212, 1));
+}
+
+.ms-DatePicker-monthOption:active {
+    background-color: rgba(199, 224, 244, 1);
+    background-color: rgba(var(--palette-primary-tint-20, 199, 224, 244), 1);
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--palette-black-alpha-80,rgba(0, 0, 0, 0.87));
+}
+
+.ms-DatePicker-topLeftCornerDate {
+    border-top-left-radius: 2px;
+}
+
+.ms-DatePicker-topRightCornerDate {
+    border-top-right-radius: 2px;
+}
+
+.ms-DatePicker-bottomLeftCornerDate {
+    border-bottom-left-radius: 2px;
+}
+
+.ms-DatePicker-bottomRightCornerDate {
+    border-bottom-right-radius: 2px;
+}
+
+.ms-slideDownIn10 {
+    animation-name: ms-fadeIn, ms-slideDownIn10;
+    animation-duration: .167s;
+    animation-timing-function: cubic-bezier(.1, .25, .75, .9);
+    animation-fill-mode: both;
+}

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { css, KeyCode, getId, format } from './FabricUtil';
+import { getId, format } from './FabricUtil';
 import { ICalendarStrings, ICalendarIconStrings, ICalendarFormatDateCallbacks } from './Calendar.types';
 import { DayOfWeek, FirstWeekOfYear, DateRangeType } from './DateValues';
 import { FocusZone } from 'azure-devops-ui/FocusZone';
 import { Icon } from 'azure-devops-ui/Icon';
+import { css, KeyCode } from 'azure-devops-ui/Util';
 import {
   addDays,
   addWeeks,

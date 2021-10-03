@@ -1,7 +1,3 @@
-import { css, KeyCode } from 'azure-devops-ui/Util';
-
-export { css, KeyCode };
-
 /**
  * AssertNever is a utility function that can be used for exhaustiveness checks in switch statements.
  *

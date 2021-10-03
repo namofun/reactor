@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KeyCode, css } from './FabricUtil';
+import { css, KeyCode } from 'azure-devops-ui/Util';
 import { ICalendarStrings, ICalendarIconStrings, ICalendarFormatDateCallbacks } from './Calendar.types';
 import { FocusZone } from 'azure-devops-ui/FocusZone';
 import { addYears, setMonth, getYearStart, getYearEnd, getMonthStart, getMonthEnd, compareDatePart } from './DateMath';

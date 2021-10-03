@@ -2,18 +2,14 @@
   "compilerOptions": {
     "charset": "utf8",
     "declaration": true,
-    "isolatedModules": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
+    "isolatedModules": false,
     "jsx": "react",
-    "lib": ["es5", "es6", "dom", "es2015.promise"],
-    "module": "es6",
+    "lib": ["es5", "es6", "dom", "es2015.promise", "es2016.array.include"],
+    "module": "commonjs",
     "moduleResolution": "node",
-    "noEmitHelpers": true,
-    "preserveConstEnums": true,
     "target": "es5",
-    "types": ["react", "react-dom"],
-    "outDir": "./bin"
+    "types": ["react", "react-dom", "node"],
+    "outDir": "dist/"
   },
   "include": [
     "src"

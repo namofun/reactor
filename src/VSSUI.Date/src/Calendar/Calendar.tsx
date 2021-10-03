@@ -4,7 +4,8 @@ import { DayOfWeek, FirstWeekOfYear, DateRangeType } from './DateValues';
 import { CalendarDay, ICalendarDay } from './CalendarDay';
 import { CalendarMonth, ICalendarMonth } from './CalendarMonth';
 import { compareDates, getDateRangeArray } from './DateMath';
-import { css, KeyCode, createRef } from './FabricUtil';
+import { createRef } from './FabricUtil';
+import { css, KeyCode } from 'azure-devops-ui/Util';
 import "./Calendar.css";
 
 const leftArrow = 'Up';

@@ -1,0 +1,52 @@
+.bolt-date-picker-spinner {
+    width: 441px;
+    height: 252px;
+}
+
+.bolt-date-picker {
+    height: 252px;
+    width: 450px;
+}
+
+.bolt-date-picker-input {
+    padding-right: 0;
+}
+
+@media only screen and (max-width:500px) {
+    .bolt-date-picker-input {
+        min-width: 140px;
+        width: 140px;
+    }
+}
+
+.bolt-date-picker-filterbar-item {
+    background-color: transparent;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.bolt-date-picker-filterbar-item .bolt-textfield {
+    border-color: transparent;
+}
+
+.fabric-icon-alt,
+button.ms-DatePicker-nextYear > i[data-icon-name="Down"],
+button.ms-DatePicker-prevYear > i[data-icon-name="Up"] {
+    align-self: center;
+    display: inline-flex;
+    font-family: "AzureDevOpsMDL2Assets";
+    -webkit-font-smoothing: antialiased;
+}
+
+button.ms-DatePicker-nextYear > i[data-icon-name="Down"],
+button.ms-DatePicker-prevYear > i[data-icon-name="Up"] {
+    font-style: normal;
+}
+
+button.ms-DatePicker-prevYear > i[data-icon-name="Up"]:before {
+    content: "\E74A";
+}
+
+button.ms-DatePicker-nextYear > i[data-icon-name="Down"]:before {
+    content: "\E74B";
+}

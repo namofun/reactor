@@ -1,0 +1,24 @@
+{
+  "name": "azure-devops-ui-calendar",
+  "version": "2.167.15",
+  "description": "Calendar react component for building web UI in Azure DevOps",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/azure-devops-ui"
+  },
+  "public": true,
+  "peerDependencies": {
+    "azure-devops-ui": "^2.167.15",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "azure-devops-ui": "^2.167.15",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "typescript": "^4.2.0-beta"
+  }
+}

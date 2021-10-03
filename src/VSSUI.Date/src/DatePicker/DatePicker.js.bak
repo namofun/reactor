@@ -1,0 +1,310 @@
+"use strict";
+define("VSSUI",
+["require", "exports", "react", "VSS/Core/Observable", "VSS/Platform/Layout"],
+function(e, exportSymbols, react, Observable, Layout) {
+    var varResourcesDatePicker, varCustomizedScreen, varCustomizedScreenSize, varDateStringHelper, varDatePicker, varIndex, varDatePickerFilterBarItem, varIndex2;
+    varResourcesDatePicker = exportSymbols.ResourcesDatePicker = {},
+    exportSymbols.ResourcesDatePicker.Loading = "Loading...",
+    exportSymbols.ResourcesDatePicker.goToToday = "Go to today",
+    exportSymbols.ResourcesDatePicker.invalidInputErrorMessage = "Invalid date value specified.",
+    exportSymbols.ResourcesDatePicker.isRequiredErrorMessage = "A valid date is required",
+    exportSymbols.ResourcesDatePicker.isOutOfBoundsErrorMessage = "Selected date is not within the valid range",
+    exportSymbols.ResourcesDatePicker.DatePickerCalloutLabel = "Date Picker Callout",
+    exportSymbols.ResourcesDatePicker.sunday = "Sunday",
+    exportSymbols.ResourcesDatePicker.monday = "Monday",
+    exportSymbols.ResourcesDatePicker.tuesday = "Tuesday",
+    exportSymbols.ResourcesDatePicker.wednesday = "Wednesday",
+    exportSymbols.ResourcesDatePicker.thursday = "Thursday",
+    exportSymbols.ResourcesDatePicker.friday = "Friday",
+    exportSymbols.ResourcesDatePicker.saturday = "Saturday",
+    exportSymbols.ResourcesDatePicker.sun = "Sun",
+    exportSymbols.ResourcesDatePicker.mon = "Mon",
+    exportSymbols.ResourcesDatePicker.tue = "Tue",
+    exportSymbols.ResourcesDatePicker.wed = "Wed",
+    exportSymbols.ResourcesDatePicker.thu = "Thu",
+    exportSymbols.ResourcesDatePicker.fri = "Fri",
+    exportSymbols.ResourcesDatePicker.sat = "Sat",
+    exportSymbols.ResourcesDatePicker.january = "January",
+    exportSymbols.ResourcesDatePicker.february = "February",
+    exportSymbols.ResourcesDatePicker.march = "March",
+    exportSymbols.ResourcesDatePicker.april = "April",
+    exportSymbols.ResourcesDatePicker.may = "May",
+    exportSymbols.ResourcesDatePicker.june = "June",
+    exportSymbols.ResourcesDatePicker.july = "July",
+    exportSymbols.ResourcesDatePicker.august = "August",
+    exportSymbols.ResourcesDatePicker.september = "September",
+    exportSymbols.ResourcesDatePicker.october = "October",
+    exportSymbols.ResourcesDatePicker.november = "November",
+    exportSymbols.ResourcesDatePicker.december = "December",
+    exportSymbols.ResourcesDatePicker.jan = "Jan",
+    exportSymbols.ResourcesDatePicker.feb = "Feb",
+    exportSymbols.ResourcesDatePicker.mar = "Mar",
+    exportSymbols.ResourcesDatePicker.apr = "Apr",
+    exportSymbols.ResourcesDatePicker.jun = "Jun",
+    exportSymbols.ResourcesDatePicker.jul = "Jul",
+    exportSymbols.ResourcesDatePicker.aug = "Aug",
+    exportSymbols.ResourcesDatePicker.sep = "Sep",
+    exportSymbols.ResourcesDatePicker.oct = "Oct",
+    exportSymbols.ResourcesDatePicker.nov = "Nov",
+    exportSymbols.ResourcesDatePicker.dec = "Dec",
+    exportSymbols.ResourcesDatePicker.prevMonthAriaLabel = "Go to previous month",
+    exportSymbols.ResourcesDatePicker.nextMonthAriaLabel = "Go to next month",
+    exportSymbols.ResourcesDatePicker.prevYearAriaLabel = "Go to previous year",
+    exportSymbols.ResourcesDatePicker.nextYearAriaLabel = "Go to next year",
+    function(e) {
+        varCustomizedScreen = exportSymbols.UtilsCustomizedScreen = {};
+        exportSymbols.UtilsCustomizedScreen.ScreenContext = react.createContext(new class {
+            constructor() {
+                this.onResize = (()=>{
+                    const size = this.getCurrentSize();
+                    this.size.value !== size && (this.size.value = size)
+                }),
+                this.size = new Observable.ObservableValue(this.getCurrentSize()),
+                window.addEventListener("resize", this.onResize)
+            }
+            getCurrentSize() {
+                return window.innerWidth >= 750 ? 1 : 0
+            }
+        }
+        )
+    }(),
+    function(e) {
+        varCustomizedScreenSize = exportSymbols.UtilsCustomizedScreenSize = {};
+        exportSymbols.UtilsCustomizedScreenSize.CustomizedScreenSizeObserver = (
+            cssoProps => react.createElement(
+                varCustomizedScreen.ScreenContext.Consumer,
+                null,
+                context => react.createElement(
+                    exportSymbols.Observer.Observer,
+                    { screenSize: context.size },
+                    cssoProps.children
+                )
+            )
+        );
+        exportSymbols.UtilsCustomizedScreenSize.ScreenSizeConditional = (
+            sscProps => react.createElement(
+                exportSymbols.UtilsCustomizedScreenSize.CustomizedScreenSizeObserver,
+                null,
+                t => sscProps.condition(t.screenSize) && sscProps.children
+            )
+        )
+    }(),
+    function(e) {
+        varDateStringHelper = exportSymbols.ComponentsDatePickerDateStringHelper = {},
+        exportSymbols.ComponentsDatePickerDateStringHelper.datePickerStrings = function() {
+            return {
+                months: [varResourcesDatePicker.january, varResourcesDatePicker.february, varResourcesDatePicker.march, varResourcesDatePicker.april, varResourcesDatePicker.may, varResourcesDatePicker.june, varResourcesDatePicker.july, varResourcesDatePicker.august, varResourcesDatePicker.september, varResourcesDatePicker.october, varResourcesDatePicker.november, varResourcesDatePicker.december],
+                shortMonths: [varResourcesDatePicker.jan, varResourcesDatePicker.feb, varResourcesDatePicker.mar, varResourcesDatePicker.apr, varResourcesDatePicker.may, varResourcesDatePicker.jun, varResourcesDatePicker.jul, varResourcesDatePicker.aug, varResourcesDatePicker.sep, varResourcesDatePicker.oct, varResourcesDatePicker.nov, varResourcesDatePicker.dec],
+                days: [varResourcesDatePicker.sunday, varResourcesDatePicker.monday, varResourcesDatePicker.tuesday, varResourcesDatePicker.wednesday, varResourcesDatePicker.thursday, varResourcesDatePicker.friday, varResourcesDatePicker.saturday],
+                shortDays: [varResourcesDatePicker.sun, varResourcesDatePicker.mon, varResourcesDatePicker.tue, varResourcesDatePicker.wed, varResourcesDatePicker.thu, varResourcesDatePicker.fri, varResourcesDatePicker.sat],
+                goToToday: varResourcesDatePicker.goToToday,
+                prevMonthAriaLabel: varResourcesDatePicker.prevMonthAriaLabel,
+                nextMonthAriaLabel: varResourcesDatePicker.nextMonthAriaLabel,
+                prevYearAriaLabel: varResourcesDatePicker.prevYearAriaLabel,
+                nextYearAriaLabel: varResourcesDatePicker.nextYearAriaLabel
+            }
+        }
+    }(),
+    function(e) {
+        varDatePicker = exportSymbols.ComponentsDatePickerDatePicker = {};
+        exportSymbols.ComponentsDatePickerDatePicker.DatePicker = class extends react.Component {
+            constructor(props) {
+                super(props),
+                this.containerDiv = react.createRef(),
+                this.calendarDismissed = (()=>{
+                    this.setState({
+                        pickerShown: !1
+                    })
+                }),
+                this.onClick = (mouseEvent=>{
+                    mouseEvent.defaultPrevented || this.props.disabled || (this.setState({
+                        pickerShown: !0
+                    }),
+                    mouseEvent.preventDefault())
+                }),
+                this.onKeyDown = (keyboardEvent=>{
+                    keyboardEvent.defaultPrevented || this.props.disabled || (40 === keyboardEvent.which || 13 === keyboardEvent.which ? (this.setState({
+                        pickerShown: !0
+                    }),
+                    keyboardEvent.preventDefault()) : 27 === keyboardEvent.which && (this.setState({
+                        pickerShown: !1
+                    }),
+                    keyboardEvent.preventDefault()))
+                }),
+                this.onSelectDate = (date=>{
+                    this.setState({
+                        pickerShown: !1
+                    }),
+                    this.props.onChange && this.props.onChange(date)
+                }),
+                this.renderSpinner = (() =>
+                    react.createElement("div",
+                        { className: "bolt-date-picker-spinner flex-row flex-center justify-center" },
+                        react.createElement(exportSymbols.Spinner.Spinner,
+                            { label: varResourcesDatePicker.Loading, size: "large" }
+                        )
+                    )
+                ),
+                props && (this.state = {
+                    pickerShown: !1
+                })
+            }
+            render() {
+                const {containerClassName: containerClassName} = this.props;
+                return react.createElement(
+                    exportSymbols.Observer.Observer,
+                    { date: this.props.value },
+                    dateProps => react.createElement(
+                        "div",
+                        {
+                            "aria-expanded": this.state.pickerShown,
+                            role: "combobox",
+                            className: containerClassName,
+                            ref: this.containerDiv
+                        },
+                        react.createElement(
+                            exportSymbols.FormItem.FormItem,
+                            {
+                                error: this.props.hasError,
+                                message: this.props.errorMessage
+                            },
+                            react.createElement(
+                                exportSymbols.TextField.TextField,
+                                {
+                                    "aria-controls": this.state.pickerShown ? this.props.calendarId : void 0,
+                                    ariaLabel: this.props.ariaLabel,
+                                    ariaHasPopup: !0,
+                                    className: exportSymbols.Util.css("flex-row flex-grow", this.props.className),
+                                    disabled: this.props.disabled,
+                                    inputClassName: "bolt-date-picker-input",
+                                    onClick: this.onClick,
+                                    onKeyDown: this.onKeyDown,
+                                    role: "textbox",
+                                    readOnly: !0,
+                                    suffixIconProps: {
+                                        iconName: "Calendar",
+                                        onClick: this.onClick
+                                    },
+                                    placeholder: this.props.placeholder,
+                                    value: dateProps.date ? dateProps.date.toLocaleString(void 0, {
+                                        year: "numeric",
+                                        month: "numeric",
+                                        day: "numeric"
+                                    }) : void 0
+                                }
+                            )
+                        ),
+                        this.state.pickerShown && react.createElement(
+                            varCustomizedScreenSize.CustomizedScreenSizeObserver,
+                            null,
+                            screenSizeProps => {
+                                const isSmall = 0 === screenSizeProps.screenSize;
+                                return react.createElement(
+                                    exportSymbols.Callout.Callout,
+                                    {
+                                        anchorElement: isSmall ? void 0 : this.containerDiv.current,
+                                        anchorOrigin: isSmall ? void 0 : {
+                                            horizontal: "start",
+                                            vertical: "end"
+                                        },
+                                        ariaLabel: this.props.calloutAriaLabel || varResourcesDatePicker.DatePickerCalloutLabel,
+                                        contentClassName: "depth-8 bolt-date-picker",
+                                        contentLocation: isSmall ? 0 : void 0,
+                                        contentShadow: !0,
+                                        id: this.props.calendarId,
+                                        onDismiss: this.calendarDismissed,
+                                        escDismiss: !0,
+                                        lightDismiss: !0,
+                                        focuszoneProps: this.props.focusZoneProps
+                                    },
+                                    react.createElement(
+                                        Layout.WrappedComponent,
+                                        {
+                                            className: "bolt-date-picker",
+                                            dependencies: ["ms.vss-features.ui-calendar-content"],
+                                            loadingComponent: this.renderSpinner,
+                                            wrappedProps: {
+                                                onSelectDate: this.onSelectDate,
+                                                onDismiss: this.calendarDismissed,
+                                                shouldFocusOnMount: !0,
+                                                minDate: this.props.minDate,
+                                                maxDate: this.props.maxDate,
+                                                value: dateProps.date,
+                                                strings: varDateStringHelper.datePickerStrings()
+                                            },
+                                            wrappedType: "fabric.pickers.calendar"
+                                        }
+                                    )
+                                )
+                            }
+                        )
+                    )
+                )
+            }
+        }
+    }(),
+    varIndex = exportSymbols.ComponentsDatePickerindex = {},
+    __exportStar(varDatePicker, exportSymbols.ComponentsDatePickerindex),
+    function(componentName) {
+        varDatePickerFilterBarItem = exportSymbols[componentName] = {};
+        exportSymbols[componentName].DatePickerFilterBarItem = class extends exportSymbols.FilterBarItem.FilterBarItem {
+            constructor(props) {
+                super(props),
+                this.filterDate = new Observable.ObservableValue(void 0),
+                this.componentDidMount = (()=>{
+                    var e;
+                    if (super.componentDidMount(),
+                    this.props.filter) {
+                        const t = null === (e = this.props.filter) || void 0 === e ? void 0 : e.getFilterItemState(this.props.filterItemKey);
+                        this.onFilterChanged(t)
+                    }
+                }),
+                this.onFilterChanged = (state=>{
+                    super.onFilterChanged(state),
+                    state && state.value ? this.filterDate.value = state.value : this.filterDate.value = void 0
+                }),
+                this._onSelectionChanged = (date=>{
+                    this.setFilterValue({
+                        value: date
+                    }),
+                    this.filterDate.value = date
+                }),
+                this.filterDate.value = props.initialValue
+            }
+            focus() {
+                return !1
+            }
+            render() {
+                return react.createElement("div", {
+                    className: "bolt-date-picker-filterbar-item"
+                }, react.createElement(varDatePicker.DatePicker, {
+                    value: this.filterDate,
+                    onChange: this._onSelectionChanged,
+                    placeholder: this.props.placeholder
+                }))
+            }
+        }
+    }("ComponentsDatePickerFilterBarItemDatePickerFilterBarItem"),
+    varIndex2 = exportSymbols.ComponentsDatePickerFilterBarItemindex = {},
+    __exportStar(varDatePickerFilterBarItem, exportSymbols.ComponentsDatePickerFilterBarItemindex),
+    exportSymbols.DatePicker = {},
+    __exportStar(varIndex, exportSymbols.DatePicker),
+    __exportStar(varIndex2, exportSymbols.DatePicker)
+},
+[
+    "Resources.DatePicker",
+    "Utils/CustomizedScreen",
+    "Utils/CustomizedScreenSize",
+    "Components/DatePicker/DateStringHelper",
+    "Components/DatePicker/DatePicker",
+    "Components/DatePicker/index",
+    "Components/DatePickerFilterBarItem/DatePickerFilterBarItem",
+    "Components/DatePickerFilterBarItem/index",
+    "DatePicker"
+]),
+document.dispatchEvent(new CustomEvent("scriptLoaded",{
+    cancelable: !1,
+    detail: {
+        id: "ms.vss-features.ui-date-picker-content"
+    }
+}));

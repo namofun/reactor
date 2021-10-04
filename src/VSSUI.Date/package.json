@@ -1,8 +1,10 @@
 {
-  "name": "azure-devops-ui-calendar",
+  "name": "azure-devops-ui-datepicker",
   "version": "2.167.15",
-  "description": "Calendar react component for building web UI in Azure DevOps",
-  "license": "UNLICENSED",
+  "description": "Calendar and DatePicker react component for building web UI in Azure DevOps",
+  "license": "MIT",
+  "public": true,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/Microsoft/azure-devops-ui"

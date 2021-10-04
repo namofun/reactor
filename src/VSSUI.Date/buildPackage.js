@@ -37,7 +37,7 @@ const publishFiles = shell.find('bin').filter(s => s !== 'bin').map(s => {
 
 const packageJson = JSON.parse(fs.readFileSync('./package.json', "utf8"));
 packageJson.files = publishFiles;
-packageJson.license = "MIT";
+delete packageJson.private;
 fs.writeFileSync('./bin/package.json', JSON.stringify(packageJson, null, 2));
 console.log('--- done');
 console.log('');

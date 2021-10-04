@@ -380,7 +380,7 @@
 .ms-DatePicker-day--today.ms-DatePicker-day:active {
     position: relative;
     color: rgba(255, 255, 255);
-    color: rgba(var(--palette-neutral-0), 1);
+    color: rgba(var(--palette-neutral-0, 255, 255, 255), 1);
     font-weight: 600;
     background: rgba(0, 120, 212, 1);
     background: var(--status-info-background, rgba(0, 120, 212, 1));
@@ -552,7 +552,7 @@ html .ms-DatePicker-header .ms-DatePicker-currentDecade {
     background-color: rgba(51, 51, 51, 1);
     background-color: rgba(var(--palette-neutral-80, 51, 51, 51), 1);
     color: rgba(255, 255, 255);
-    color: rgba(var(--palette-neutral-0), 1);
+    color: rgba(var(--palette-neutral-0, 255, 255, 255), 1);
 }
 
 .ms-DatePicker-day--disabled,
@@ -874,7 +874,7 @@ html .ms-DatePicker-header .ms-DatePicker-currentDecade {
 .ms-DatePicker-month--currentMonth {
     font-weight: 600;
     color: rgba(255, 255, 255);
-    color: rgba(var(--palette-neutral-0), 1);
+    color: rgba(var(--palette-neutral-0, 255, 255, 255), 1);
     background-color: rgba(0, 120, 212, 1);
     background-color: var(--status-info-background, rgba(0, 120, 212, 1));
 }
@@ -882,7 +882,7 @@ html .ms-DatePicker-header .ms-DatePicker-currentDecade {
 .ms-DatePicker-month--currentMonth.ms-DatePicker-monthOption:hover {
     font-weight: 600;
     color: rgba(255, 255, 255);
-    color: rgba(var(--palette-neutral-0), 1);
+    color: rgba(var(--palette-neutral-0, 255, 255, 255), 1);
     background-color: rgba(0, 120, 212, 1);
     background-color: var(--status-info-background, rgba(0, 120, 212, 1));
 }

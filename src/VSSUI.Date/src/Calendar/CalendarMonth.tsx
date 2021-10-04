@@ -27,11 +27,8 @@ export interface ICalendarMonthProps extends React.Props<CalendarMonth> {
 }
 
 export class CalendarMonth extends React.Component<ICalendarMonthProps, {}> {
-  public refs: {
-    [key: string]: React.ReactInstance;
-    navigatedMonth: HTMLElement;
-  };
 
+  private navigatedMonthRef = React.createRef<HTMLButtonElement>();
   private _selectMonthCallbacks: (() => void)[];
 
   public constructor(props: ICalendarMonthProps) {
@@ -133,7 +130,7 @@ export class CalendarMonth extends React.Component<ICalendarMonthProps, {}> {
                 aria-label={ dateTimeFormatter.formatMonthYear(indexedMonth, strings) }
                 aria-selected={ isCurrentMonth || isNavigatedMonth }
                 data-is-focusable={ isInBounds ? true : undefined }
-                ref={ isNavigatedMonth ? 'navigatedMonth' : undefined }
+                ref={ this.navigatedMonthRef }
               >
                 { month }
               </button>;
@@ -146,9 +143,9 @@ export class CalendarMonth extends React.Component<ICalendarMonthProps, {}> {
   }
 
   public focus() {
-    if (this.refs.navigatedMonth) {
-      this.refs.navigatedMonth.tabIndex = 0;
-      this.refs.navigatedMonth.focus();
+    if (this.navigatedMonthRef.current) {
+      this.navigatedMonthRef.current.tabIndex = 0;
+      this.navigatedMonthRef.current.focus();
     }
   }
 

@@ -434,3 +434,4 @@ $RECYCLE.BIN/
 
 # Project Custom
 src/VSSUI.Demo/package-lock.json
+!src/VSSUI.Platform/src/Components/Icon

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "charset": "utf8",
+    "declaration": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "preserveConstEnums": true,
+    "jsx": "react",
+    "lib": ["es5", "es6", "dom", "es2015.promise", "es2016.array.include"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es5",
+    "types": ["react", "react-dom", "node"],
+    "outDir": "bin/"
+  },
+  "include": [
+    "src"
+  ]
+}

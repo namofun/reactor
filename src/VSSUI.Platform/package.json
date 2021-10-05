@@ -1,0 +1,37 @@
+{
+  "name": "@namofun/vssui-platform",
+  "version": "1.0.0",
+  "description": "React component for building whole Azure DevOps experience web UI",
+  "license": "MIT",
+  "public": true,
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/namofun/reactor"
+  },
+  "scripts": {
+    "build": "node buildPackage.js"
+  },
+  "peerDependencies": {
+    "azure-devops-ui": "^2.167.15",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.2",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-router": "^5.1.16",
+    "azure-devops-ui": "^2.167.15",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "recursive-copy": "^2.0.13",
+    "shelljs": "^0.8.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.2.0-beta"
+  }
+}

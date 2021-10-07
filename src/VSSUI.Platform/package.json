@@ -10,7 +10,8 @@
     "url": "https://github.com/namofun/reactor"
   },
   "scripts": {
-    "build": "node buildPackage.js"
+    "icon": "node updateIcon.js",
+    "build": "npm run icon && node buildPackage.js"
   },
   "peerDependencies": {
     "azure-devops-ui": "^2.167.15",

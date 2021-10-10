@@ -8,6 +8,7 @@ import { Observer } from "azure-devops-ui/Observer";
 import { FormItem } from "azure-devops-ui/FormItem";
 import { TextField } from "azure-devops-ui/TextField";
 import { Callout, ContentLocation } from "azure-devops-ui/Callout";
+import { IconSize } from "azure-devops-ui/Icon";
 import { Calendar } from "../Calendar";
 
 import "./DatePicker.css";
@@ -23,12 +24,14 @@ export interface IDatePickerProps {
     disabled?: boolean;
     errorMessage?: IReadonlyObservableValue<string> | string;
     hasError?: IReadonlyObservableValue<boolean> | boolean;
-    onChange?: (date: Date) => void;
+    onChange?: (date?: Date) => void;
+    onClear?: () => void;
     placeholder?: string;
     value: IReadonlyObservableValue<Date | undefined> | Date | undefined;
     minDate?: Date;
     maxDate?: Date;
     focusZoneProps?: IFocusZoneProps;
+    hasClearButton?: boolean;
 }
 
 export interface IDateTimePickerState {
@@ -37,10 +40,12 @@ export interface IDateTimePickerState {
 
 export class DatePicker extends React.Component<IDatePickerProps, IDateTimePickerState> {
     private containerDiv : React.RefObject<HTMLDivElement>;
+    private inputElement : React.RefObject<TextField>;
 
     constructor(props: IDatePickerProps) {
         super(props);
         this.containerDiv = React.createRef<HTMLDivElement>();
+        this.inputElement = React.createRef<TextField>();
 
         if (props) {
             this.state = { pickerShown: false };
@@ -70,10 +75,28 @@ export class DatePicker extends React.Component<IDatePickerProps, IDateTimePicke
         }
     }
 
-    public onSelectDate = (date: Date) => {
+    public onSelectDate = (date?: Date) => {
         this.setState({ pickerShown: false });
         if (this.props.onChange) {
             this.props.onChange(date);
+        }
+    }
+
+    private clear = (): void => {
+        this.props.onClear && this.props.onClear();
+        this.props.onChange(undefined);
+        this.inputElement.current?.focus();
+    }
+
+    private onClearClicked = (ev: React.MouseEvent<HTMLSpanElement>): void => {
+        this.clear();
+        ev.preventDefault();
+    }
+
+    private onClearKeyDown = (ev: React.KeyboardEvent<HTMLSpanElement>): void => {
+        if (ev.which === KeyCode.enter) {
+            this.clear();
+            ev.preventDefault();
         }
     }
 
@@ -111,6 +134,19 @@ export class DatePicker extends React.Component<IDatePickerProps, IDateTimePicke
                                 role="textbox"
                                 readOnly={true}
                                 prefixIconProps={{ iconName: "Calendar", onClick: this.onClick }}
+                                suffixIconProps={
+                                    this.props.hasClearButton && !this.props.disabled && dateProps.date
+                                        ? {
+                                            ariaHidden: false,
+                                            iconName: "Clear",
+                                            size: IconSize.small,
+                                            onClick: this.onClearClicked,
+                                            onKeyDown: this.onClearKeyDown,
+                                            tabIndex: 0
+                                        }
+                                        : undefined
+                                }
+                                ref={this.inputElement}
                                 placeholder={this.props.placeholder}
                                 value={dateProps.date ? dateProps.date.toLocaleString(undefined, { year: "numeric", month: "numeric", day: "numeric" }) : undefined}
                             />

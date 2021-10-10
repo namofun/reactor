@@ -10,6 +10,7 @@ export interface IDatePickerFilterBarItemState extends IFilterBarItemState<Date>
 
 export interface IDatePickerFilterBarItemProps extends IFilterBarItemProps {
     initialValue?: Date;
+    hasClearButton?: boolean;
 }
 
 export class DatePickerFilterBarItem extends FilterBarItem<Date, IDatePickerFilterBarItemProps, IDatePickerFilterBarItemState> {
@@ -53,6 +54,7 @@ export class DatePickerFilterBarItem extends FilterBarItem<Date, IDatePickerFilt
                     value={this.filterDate}
                     onChange={this.onSelectionChanged}
                     placeholder={this.props.placeholder}
+                    hasClearButton={this.props.hasClearButton}
                 />
             </div>
         );

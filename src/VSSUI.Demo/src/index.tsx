@@ -23,6 +23,12 @@ ReactDOM.render(
                   filter={filter}
                   placeholder="Enter a Date"
               />
+              <DatePickerFilterBarItem
+                  filterItemKey="date2"
+                  filter={filter}
+                  placeholder="Enter a Date"
+                  hasClearButton={true}
+              />
           </FilterBar>
         </Page>
       </Surface>

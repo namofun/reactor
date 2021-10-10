@@ -27,6 +27,7 @@ console.log('--- done');
 console.log('');
 
 console.log('--- Produce minified js');
+let originalBytes = 0, mangledBytes = 0, processedFiles = 0;
 shell.find('bin').filter(s =>
     s !== 'bin'
     && s.startsWith('bin/')
@@ -36,16 +37,21 @@ shell.find('bin').filter(s =>
     const mangledName = fileName.substr(0, fileName.length - 2) + 'min.js';
     const originalCode = fs.readFileSync(fileName, 'utf-8');
     const mangledCode = UglifyES.minify(originalCode, { mangle: true, compress: true }).code;
+    processedFiles++;
+    originalBytes += originalCode.length;
+    mangledBytes += mangledCode.length;
     fs.writeFileSync(mangledName, mangledCode, 'utf-8');
-    console.log('>>> ' + fileName.substr(4) + ' -> ' + originalCode.length + 'B, ratio ' + (Math.round(10000*mangledCode.length/originalCode.length)/100) + '%')
 });
+console.log(`>>> Processed ${processedFiles} .JS files, compress ratio ${Math.round(10000*mangledBytes/originalBytes)/100}%`);
 console.log('--- done');
 console.log('');
 
 console.log('--- Enlisting publish files');
 const publishFiles = shell.find('bin').filter(s => s !== 'bin').map(s => {
     if (s.startsWith('bin/')) {
-        return s.substr(4);
+        const fileName = s.substr(4);
+        console.log('>>> ' + fileName);
+        return fileName;
     } else {
         throw "Unknwon file " + s;
     }

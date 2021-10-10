@@ -28,7 +28,7 @@ class CustomizedScreenContextImp implements ICustomizedScreenContext {
         return window.innerWidth >= 750 ? 1 : 0;
     }
 
-    public onResize() {
+    public onResize = (): void => {
         const size = this.getCurrentSize();
         if (this.size.value !== size) {
             this.size.value = size;

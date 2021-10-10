@@ -3,19 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "azure-devops-ui": "^2.167.15",
+    "azure-devops-ui": "^2.167.16",
     "azure-devops-ui-datepicker": "file:../VSSUI.Date/bin",
+    "@namofun/vssui-platform": "file:../VSSUI.Platform/bin",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "tslib": "^2.3.1",
-    "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
   "browserslist": {
     "production": [
@@ -34,6 +38,9 @@
     "@types/react-dom": "^16.8.0",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.8",
-    "react-scripts": "4.0.3"
+    "eslint": "^7.11.0",
+    "react-scripts": "4.0.3",
+    "tslib": "^2.3.1",
+    "typescript": "^4.3.5"
   }
 }

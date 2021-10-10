@@ -1,38 +1,22 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Surface, SurfaceBackground } from "azure-devops-ui/Surface";
-import { Page } from "azure-devops-ui/Page";
-import { Filter } from "azure-devops-ui/Utilities/Filter";
-import { FilterBar } from "azure-devops-ui/FilterBar";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
-import { DatePickerFilterBarItem } from "azure-devops-ui-datepicker";
+import 'azure-devops-ui/Core/override.css';
+import "@namofun/vssui-platform/Theme/Light.css";
 
-import "azure-devops-ui/Core/override.css";
-
-const scrollRef = React.createRef<HTMLDivElement>();
-const filter = new Filter();
+import App from "./App";
+import NotFound from "./NotFound";
+import DatePickerTest from "./DatePickerTest";
 
 ReactDOM.render(
-  <div className="full-size flex-column">
-    <div className="flex-row flex-grow v-scroll-auto">
-      <Surface background={SurfaceBackground.neutral}>
-        <Page className="flex-grow custom-scrollbar scroll-auto-hide" scrollableContainerRef={scrollRef}>
-          <FilterBar filter={filter}>
-              <DatePickerFilterBarItem
-                  filterItemKey="date"
-                  filter={filter}
-                  placeholder="Enter a Date"
-              />
-              <DatePickerFilterBarItem
-                  filterItemKey="date2"
-                  filter={filter}
-                  placeholder="Enter a Date"
-                  hasClearButton={true}
-              />
-          </FilterBar>
-        </Page>
-      </Surface>
-    </div>
-  </div>,
+  <BrowserRouter>
+    <App>
+      <Switch>
+        <Route exact path="/date-picker" component={DatePickerTest} />
+        <Route component={NotFound} />
+      </Switch>
+    </App>
+  </BrowserRouter>,
   document.getElementById('react-root')
 );

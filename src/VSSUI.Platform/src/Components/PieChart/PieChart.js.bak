@@ -1,0 +1,83 @@
+"use strict";
+define("TFS/Views/PieChart", [
+    "require",
+    "exports",
+    "react",
+    "d3",
+    "VSS/Core/Util/Object",
+    "VSSUI/Util"
+], function(
+    RequireFunc,
+    Exports,
+    React,
+    D3,
+    UtilObject,
+    UIUtil)
+{
+    !function(t) {
+        Exports.PieChart = {};
+        Exports.PieChart.PieChart = class extends React.Component {
+            constructor(props) {
+                super(props);
+                this._graphContainerId = UtilObject.getId("graph-container");
+                this._svgId = UtilObject.getId("svg-id");
+            }
+            render() {
+                return React.createElement(
+                    "div",
+                    {
+                        className: UIUtil.css(this.props.pieChartClass, "relative"),
+                        id: this._graphContainerId
+                    },
+                    this.props.pieChartText && React.createElement(
+                        "div",
+                        {
+                            className: UIUtil.css(this.props.textClass, "absolute-fill")
+                        },
+                        this.props.pieChartText
+                    )
+                )
+            }
+            componentDidMount() {
+                this._drawPieChart()
+            }
+            componentDidUpdate() {
+                this._drawPieChart()
+            }
+            _drawPieChart() {
+                const scale = D3.scaleOrdinal(this.props.colors);
+                D3.select("#" + this._svgId).remove();
+                const svgContainer = D3
+                    .select("#" + this._graphContainerId)
+                    .append("svg")
+                    .attr("id", this._svgId)
+                    .attr("width", this.props.graphWidth)
+                    .attr("height", this.props.graphHeight);
+                const pies = D3.pie()
+                    .sort(null);
+                const arcs = D3.arc()
+                    .innerRadius(this.props.innerRadius ? this.props.innerRadius : 0)
+                    .outerRadius(this.props.outerRadius);
+                svgContainer
+                    .append("g")
+                    .attr("transform", "translate(" + this.props.outerRadius + "," + this.props.outerRadius + ")")
+                    .selectAll(".arc")
+                    .data(pies(this.props.data))
+                    .enter()
+                    .append("g")
+                    .attr("class", "arc")
+                    .append("path")
+                    .attr("fill", (e,s) => scale(s.toString()))
+                    .attr("d", arcs);
+            }
+        }
+    }()
+}, [
+    "PieChart"
+]),
+document.dispatchEvent(new CustomEvent("scriptLoaded",{
+    cancelable: !1,
+    detail: {
+        id: "ms.vss-tfs-web.pie-chart"
+    }
+}));

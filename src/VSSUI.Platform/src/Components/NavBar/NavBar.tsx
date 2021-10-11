@@ -1,23 +1,86 @@
 import * as React from "react";
-import { Icon } from "azure-devops-ui/Icon";
-import { Link } from "azure-devops-ui/Link";
-import { Breadcrumb, IBreadcrumbItem } from "azure-devops-ui/Breadcrumb";
 import { RouteComponentProps } from "react-router";
+import { Icon } from "azure-devops-ui/Icon";
+import { Breadcrumb, IBreadcrumbItem } from "azure-devops-ui/Breadcrumb";
+import { IndeterminateProgressBar } from "azure-devops-ui/ProgressBar";
+import { ObservableValue } from "azure-devops-ui/Core/Observable";
+import { FocusZone, FocusZoneDirection } from "azure-devops-ui/FocusZone";
+
 import './NavBar.css';
+import { SuiteLogo } from "./SuiteLogo";
+
+interface IWithHeaderProgressBarState {
+  loading?: ObservableValue<boolean>;
+}
+
+class WithHeaderProgressBar extends React.Component<{}, IWithHeaderProgressBarState> {
+
+  constructor() {
+    super({});
+    this.state = {
+      loading: new ObservableValue<boolean>(true)
+    };
+  }
+
+  private clearLoading = (() => {
+    this.setState({
+      loading: undefined
+    });
+  });
+
+  private startLoading = (() => {
+    this.setState({
+      loading: new ObservableValue<boolean>(true)
+    });
+  })
+
+  private setLoadingComplete = (() => {
+    if (this.state.loading !== undefined) {
+      this.state.loading.value = false;
+    }
+  });
+
+  public render() {
+    return (
+      <>
+        {this.props.children}
+        {this.state.loading !== undefined && (
+          <IndeterminateProgressBar
+              className="project-header-progress"
+              loading={this.state.loading}
+              loadingAnimationComplete={this.clearLoading}
+          />
+        )}
+      </>
+    );
+  }
+
+  public componentDidMount() {
+    document.body.addEventListener("fpsLoading", this.startLoading);
+    document.body.addEventListener("fpsLoaded", this.setLoadingComplete);
+  }
+
+  public componentWillUnmount() {
+    document.body.removeEventListener("fpsLoaded", this.setLoadingComplete);
+    document.body.removeEventListener("fpsLoading", this.startLoading);
+  }
+}
 
 export interface INavBarProps extends RouteComponentProps {
   breadcrumb: IBreadcrumbItem[];
 }
 
-export class NavBar extends React.Component<INavBarProps> {
-
+class NavBarImp extends React.Component<INavBarProps> {
   public render() {
     return (
-      <div className="project-header flex-row flex-noshrink" role="navigation">
+      <>
         <div className="flex-row flex-grow region-header" data-renderedregion="header" role="menubar">
-          <Link title="Site Home Page" className="commandbar-item suite-logo flex-row flex-noshrink flex-center" href="/" role="menuitem" tabIndex={0}>
-            <Icon iconName="VSTSLogo" className="suite-image commandbar-icon justify-center flex-noshrink compact-fabric-icon" />
-          </Link>
+          <SuiteLogo
+              history={this.props.history}
+              href="/"
+              iconName="VSTSLogo"
+              title="VSSUI.Demo"
+          />
           <div className="flex-row flex-grow scroll-hidden bolt-breadcrumb-with-items">
             <Breadcrumb
                 className="header-breadcrumb flex-grow"
@@ -37,7 +100,21 @@ export class NavBar extends React.Component<INavBarProps> {
             <Icon iconName="PlayerSettings" className="compact-fabric-icon medium" />
           </div>
         </div>
-      </div>
+      </>
+    );
+  }
+}
+
+export class NavBar extends React.Component<INavBarProps> {
+  public render() {
+    return (
+      <FocusZone circularNavigation={true} direction={FocusZoneDirection.Horizontal} focusGroupProps={{ defaultElementId: 'suite-logo' }}>
+        <div className="project-header flex-row flex-noshrink" role="navigation">
+          <WithHeaderProgressBar>
+            <NavBarImp {...this.props} />
+          </WithHeaderProgressBar>
+        </div>
+      </FocusZone>
     );
   }
 }

@@ -4,8 +4,9 @@ import { FilterBar } from "azure-devops-ui/FilterBar";
 import { Filter } from "azure-devops-ui/Utilities/Filter";
 import { Header, TitleSize } from "azure-devops-ui/Header";
 import { DatePickerFilterBarItem } from "azure-devops-ui-datepicker";
+import { PageContent } from "@namofun/vssui-platform/PageContent";
 
-export default class DatePickerTest extends React.Component<RouteComponentProps> {
+export default class DatePickerTest extends PageContent<RouteComponentProps> {
 
   private filter = new Filter();
 
@@ -15,6 +16,11 @@ export default class DatePickerTest extends React.Component<RouteComponentProps>
         <Header
             title="Data Picker Test"
             titleSize={TitleSize.Large}
+            backButtonProps={{
+              onClick: () => {
+                this.props.history.goBack();
+              }
+            }}
         />
         <div className="page-content page-content-top">
           <FilterBar filter={this.filter}>

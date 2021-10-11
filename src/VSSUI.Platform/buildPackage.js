@@ -4,7 +4,9 @@ const copy = require("recursive-copy");
 const fs = require("fs");
 const cwd = process.cwd();
 const UglifyES = require('uglify-es');
-const copyExt = ['.js', '.d.ts', '.scss', '.css'];
+const copyExt = ['.js', '.d.ts', '.scss', '.css', '.woff'];
+
+(async function () {
 
 console.log('--- Cleaning output ./bin');
 console.log('>>> rm -rf ./bin');
@@ -22,7 +24,7 @@ console.log('');
 
 console.log('--- Copying useful files');
 console.log('>>> recursive-copy *' + copyExt.join(', *'));
-copy("./src", "./bin", { filter: f => copyExt.some(ext => f.endsWith(ext)) });
+await copy("./src", "./bin", { filter: f => copyExt.some(ext => f.endsWith(ext)), overwrite: true });
 console.log('--- done');
 console.log('');
 
@@ -62,3 +64,5 @@ delete packageJson.private;
 fs.writeFileSync('./bin/package.json', JSON.stringify(packageJson, null, 2));
 console.log('--- done');
 console.log('');
+
+})();

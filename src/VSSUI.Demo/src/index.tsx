@@ -8,11 +8,13 @@ import "@namofun/vssui-platform/Theme/Light.css";
 import App from "./App";
 import NotFound from "./NotFound";
 import DatePickerTest from "./DatePickerTest";
+import DemoIndex from "./DemoIndex";
 
 ReactDOM.render(
   <BrowserRouter>
     <App>
       <Switch>
+        <Route exact path="/" component={DemoIndex} />
         <Route exact path="/date-picker" component={DatePickerTest} />
         <Route component={NotFound} />
       </Switch>

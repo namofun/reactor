@@ -1,8 +1,9 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { ZeroData, ZeroDataActionType } from "azure-devops-ui/ZeroData";
+import { PageContent } from "@namofun/vssui-platform/PageContent";
 
-export default class NotFound extends React.Component<RouteComponentProps> {
+export default class NotFound extends PageContent<RouteComponentProps> {
 
   public render() {
     return (

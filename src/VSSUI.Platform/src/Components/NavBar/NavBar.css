@@ -1,4 +1,16 @@
 
+.project-header-progress {
+  background: transparent;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+}
+
+.project-header {
+  position: relative;
+}
+
 .region-header {
   background: rgba(255, 255, 255, 1);
   background: var(--nav-header-background,rgba(255, 255, 255, 1));
@@ -27,6 +39,11 @@
 .region-header .commandbar-item:hover {
   background-color: rgba(0,0,0,.02);
   background-color: var(--nav-header-item-hover-background,rgba(0, 0, 0, .02));
+}
+
+.region-header .suite-logo {
+  color: rgba(0, 120, 212, 1);
+  color: var(--nav-header-product-color, rgba(0, 120, 212, 1));
 }
 
 .suite-logo .suite-image {

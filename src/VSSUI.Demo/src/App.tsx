@@ -29,7 +29,12 @@ class App extends React.Component<RouteComponentProps, IAppState> {
               breadcrumb={[
                 {
                   key: 'index',
-                  text: 'Index'
+                  text: 'Index',
+                  href: '/',
+                  onClick: (event, item) => {
+                    event?.preventDefault();
+                    this.props.history.push('/');
+                  }
                 }
               ]}
               {...this.props}

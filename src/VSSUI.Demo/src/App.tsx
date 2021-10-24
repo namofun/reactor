@@ -5,13 +5,10 @@ import { Action, Location } from 'history';
 
 import { Page } from "azure-devops-ui/Page";
 import { Surface, SurfaceBackground } from "azure-devops-ui/Surface";
-import { INavigationContext, NavBar, NavigationContext } from "@namofun/vssui-platform/NavBar";
-import { ObservableValue } from 'azure-devops-ui/Core/Observable';
-import { IBreadcrumbItem } from "azure-devops-ui/Breadcrumb.Types";
+import { NavBar } from "@namofun/vssui-platform/NavBar";
 
 interface IAppState {
   input: string;
-  navCtx: INavigationContext;
 }
 
 class App extends React.Component<RouteComponentProps, IAppState> {
@@ -20,15 +17,12 @@ class App extends React.Component<RouteComponentProps, IAppState> {
 
   constructor(props: RouteComponentProps) {
     super(props);
-    this.state = {
-      input: '',
-      navCtx: { breadcrumb: new ObservableValue<IBreadcrumbItem[]>([]) }
-    };
+    this.state = { input: '' };
     this.props.history.listen(this.onRouteChange);
   }
 
   public render() {
-    return <NavigationContext.Provider value={this.state.navCtx}>
+    return (
       <div className="full-size flex-column">
         <div className="flex-column">
           <NavBar {...this.props} />
@@ -41,7 +35,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
           </Surface>
         </div>
       </div>
-    </NavigationContext.Provider>;
+    );
   }
 
   private onRouteChange = (location: Location, action: Action) => {

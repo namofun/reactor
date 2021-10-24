@@ -1,11 +1,10 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import { ZeroData, ZeroDataActionType } from "azure-devops-ui/ZeroData";
 import { PageContent } from "@namofun/vssui-platform/PageContent";
 
-export default class NotFound extends PageContent<RouteComponentProps> {
+export default class NotFound extends PageContent {
 
-  public render() {
+  public renderChildren() {
     return (
       <>
         <div className="flex-grow" />

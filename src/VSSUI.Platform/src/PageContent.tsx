@@ -1,7 +1,9 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
+import { NavigationContext } from "./NavBar";
+import { IBreadcrumbItem } from "azure-devops-ui/Breadcrumb.Types";
 
-export abstract class PageContent<TProps extends RouteComponentProps> extends React.Component<TProps> {
+export abstract class PageContent<TProps = {}> extends React.Component<TProps & RouteComponentProps> {
 
     public componentDidMount() {
         this.loadData();
@@ -18,5 +20,23 @@ export abstract class PageContent<TProps extends RouteComponentProps> extends Re
                 resolve();
             }, 1);
         });
+    }
+
+    public getBreadcrumb(): Promise<IBreadcrumbItem[] | undefined> | undefined {
+        return undefined;
+    }
+
+    public abstract renderChildren(): JSX.Element;
+
+    public render() {
+        return <>
+            <NavigationContext.Consumer>
+                {context => {
+                    this.getBreadcrumb()?.then(value => value && (context.breadcrumb.value = value));
+                    return <></>;
+                }}
+            </NavigationContext.Consumer>
+            {this.renderChildren()}
+        </>;
     }
 }

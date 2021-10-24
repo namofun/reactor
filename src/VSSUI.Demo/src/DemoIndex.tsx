@@ -1,5 +1,4 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
 import { Header, TitleSize } from "azure-devops-ui/Header";
 import { IListItemDetails, ListItem, List } from "azure-devops-ui/List";
@@ -8,6 +7,7 @@ import { Icon } from "@namofun/vssui-platform/Components/Icon/Icon";
 import { IconSize } from "azure-devops-ui/Components/Icon/Icon.Props";
 import { ILinkProps } from "azure-devops-ui/Link";
 import { PageContent } from "@namofun/vssui-platform/PageContent";
+import { IBreadcrumbItem } from "azure-devops-ui/Breadcrumb.Types";
 
 interface ITaskItem {
   description: string;
@@ -31,11 +31,11 @@ const tasks: ITaskItem[] = [
   }
 ];
 
-export default class DemoIndex extends PageContent<RouteComponentProps> {
+export default class DemoIndex extends PageContent {
 
   public tasks = new ArrayItemProvider(tasks);
 
-  public render() {
+  public renderChildren() {
     return (
       <>
         <Header
@@ -53,6 +53,20 @@ export default class DemoIndex extends PageContent<RouteComponentProps> {
         </div>
       </>
     );
+  }
+
+  public getBreadcrumb() {
+    return Promise.resolve<IBreadcrumbItem[]>([
+      {
+        key: 'index',
+        text: 'Demo Gallery',
+        href: '/',
+        onClick: (event, item) => {
+          event?.preventDefault();
+          this.props.history.push('/');
+        }
+      }
+    ]);
   }
 
   public async loadData() {

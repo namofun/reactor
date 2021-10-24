@@ -1,6 +1,6 @@
 {
   "name": "azure-devops-ui-datepicker",
-  "version": "2.167.16",
+  "version": "2.167.17",
   "description": "Calendar and DatePicker react component for building web UI in Azure DevOps",
   "license": "MIT",
   "public": true,
@@ -13,7 +13,7 @@
     "build": "node buildPackage.js"
   },
   "peerDependencies": {
-    "azure-devops-ui": "^2.167.16",
+    "azure-devops-ui": "^2.167.17",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"
   },
@@ -21,7 +21,7 @@
     "@types/node": "^16.10.2",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
-    "azure-devops-ui": "^2.167.16",
+    "azure-devops-ui": "^2.167.17",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "recursive-copy": "^2.0.13",

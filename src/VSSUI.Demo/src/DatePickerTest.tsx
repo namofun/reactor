@@ -1,16 +1,16 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import { FilterBar } from "azure-devops-ui/FilterBar";
 import { Filter } from "azure-devops-ui/Utilities/Filter";
 import { Header, TitleSize } from "azure-devops-ui/Header";
 import { DatePickerFilterBarItem } from "azure-devops-ui-datepicker";
 import { PageContent } from "@namofun/vssui-platform/PageContent";
+import { IBreadcrumbItem } from "azure-devops-ui/Breadcrumb.Types";
 
-export default class DatePickerTest extends PageContent<RouteComponentProps> {
+export default class DatePickerTest extends PageContent {
 
   private filter = new Filter();
 
-  public render() {
+  public renderChildren() {
     return (
       <>
         <Header
@@ -39,5 +39,28 @@ export default class DatePickerTest extends PageContent<RouteComponentProps> {
         </div>
       </>
     );
+  }
+
+  public getBreadcrumb() {
+    return Promise.resolve<IBreadcrumbItem[]>([
+      {
+        key: 'index',
+        text: 'Demo Gallery',
+        href: '/',
+        onClick: (event, item) => {
+          event?.preventDefault();
+          this.props.history.push('/');
+        }
+      },
+      {
+        key: 'date-picker',
+        text: 'Date Picker Test',
+        href: '/date-picker',
+        onClick: (event, item) => {
+          event?.preventDefault();
+          this.props.history.push('/date-picker');
+        }
+      }
+    ]);
   }
 }

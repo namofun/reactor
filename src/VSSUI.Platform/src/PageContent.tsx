@@ -6,11 +6,16 @@ import { IBreadcrumbItem } from "azure-devops-ui/Breadcrumb.Types";
 export abstract class PageContent<TProps = {}> extends React.Component<TProps & RouteComponentProps> {
 
     public componentDidMount() {
+        this.updateBreadcrumb();
         this.loadData();
     }
 
     public componentWillUnmount() {
         document.body.dispatchEvent(new CustomEvent("fpsLoading", { cancelable: false }));
+    }
+
+    public componentDidUpdate() {
+        this.updateBreadcrumb();
     }
 
     public loadData(): Promise<void> {
@@ -26,17 +31,9 @@ export abstract class PageContent<TProps = {}> extends React.Component<TProps & 
         return undefined;
     }
 
-    public abstract renderChildren(): JSX.Element;
-
-    public render() {
-        return <>
-            <NavigationContext.Consumer>
-                {context => {
-                    this.getBreadcrumb()?.then(value => value && (context.breadcrumb.value = value));
-                    return <></>;
-                }}
-            </NavigationContext.Consumer>
-            {this.renderChildren()}
-        </>;
+    public updateBreadcrumb(): void {
+        this.getBreadcrumb()?.then(value => value && (
+            NavigationContext.breadcrumb.value = value
+        ));
     }
 }

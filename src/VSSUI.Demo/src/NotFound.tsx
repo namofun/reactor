@@ -4,7 +4,7 @@ import { PageContent } from "@namofun/vssui-platform/PageContent";
 
 export default class NotFound extends PageContent {
 
-  public renderChildren() {
+  public render() {
     return (
       <>
         <div className="flex-grow" />

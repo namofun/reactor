@@ -35,7 +35,7 @@ export default class DemoIndex extends PageContent {
 
   public tasks = new ArrayItemProvider(tasks);
 
-  public renderChildren() {
+  public render() {
     return (
       <>
         <Header

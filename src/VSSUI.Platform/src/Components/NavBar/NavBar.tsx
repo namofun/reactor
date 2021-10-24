@@ -10,15 +10,9 @@ import { FocusZone, FocusZoneDirection } from "azure-devops-ui/FocusZone";
 import './NavBar.css';
 import { SuiteLogo } from "./SuiteLogo";
 
-export interface INavigationContext {
-    breadcrumb: ObservableValue<IBreadcrumbItem[]>;
-}
-
-class NavigationContextImp implements INavigationContext {
-    breadcrumb = new ObservableValue<IBreadcrumbItem[]>([]);
-}
-
-export const NavigationContext = React.createContext<INavigationContext>(new NavigationContextImp());
+export const NavigationContext = {
+  breadcrumb: new ObservableValue<IBreadcrumbItem[]>([])
+};
 
 
 interface IWithHeaderProgressBarState {
@@ -87,18 +81,14 @@ function NavBarImp(props: INavBarProps): JSX.Element {
 
   const breadcrumbControl = (
     <div className="flex-row flex-grow scroll-hidden bolt-breadcrumb-with-items">
-      <NavigationContext.Consumer>
-        {context => (
-          <Observer breadcrumb={context.breadcrumb}>
-            {(observedProps: { breadcrumb: IBreadcrumbItem[] }) => (
-              <Breadcrumb
-                  className="header-breadcrumb flex-grow"
-                  items={observedProps.breadcrumb}
-              />
-            )}
-          </Observer>
+      <Observer breadcrumb={NavigationContext.breadcrumb}>
+        {(observedProps: { breadcrumb: IBreadcrumbItem[] }) => (
+          <Breadcrumb
+              className="header-breadcrumb flex-grow"
+              items={observedProps.breadcrumb}
+          />
         )}
-      </NavigationContext.Consumer>
+      </Observer>
     </div>
   );
 

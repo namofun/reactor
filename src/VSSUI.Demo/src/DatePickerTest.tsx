@@ -10,7 +10,7 @@ export default class DatePickerTest extends PageContent {
 
   private filter = new Filter();
 
-  public renderChildren() {
+  public render() {
     return (
       <>
         <Header
